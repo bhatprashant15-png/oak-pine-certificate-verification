@@ -1,25 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OAK AND PINE | Certificate Verification</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f5f1e8;
   color: #263b2b;
 }
+
 header {
   background: #263b2b;
   color: white;
   padding: 24px 15px;
   text-align: center;
 }
-header h1 { margin: 0; letter-spacing: 2px; }
-header p { margin-bottom: 0; }
+
+header h1 {
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+header p {
+  margin-bottom: 0;
+}
+
 .card {
   background: white;
   max-width: 520px;
@@ -28,6 +42,7 @@ header p { margin-bottom: 0; }
   border-radius: 12px;
   box-shadow: 0 4px 18px #0001;
 }
+
 input, button {
   width: 100%;
   padding: 13px;
@@ -35,25 +50,57 @@ input, button {
   border-radius: 6px;
   font-size: 16px;
 }
-input { border: 1px solid #bbb; }
+
+input {
+  border: 1px solid #bbb;
+}
+
 button {
   background: #263b2b;
   color: white;
   border: 0;
   cursor: pointer;
 }
+
+button:hover {
+  background: #36543d;
+}
+
 #result {
   margin-top: 20px;
   padding: 14px;
   border-radius: 6px;
   overflow-wrap: anywhere;
 }
-.valid { background: #e4f5e7; color: #185b29; }
-.invalid { background: #ffebeb; color: #922; }
-footer { text-align: center; padding: 20px; }
-a { color: inherit; }
+
+#result:empty {
+  display: none;
+}
+
+.valid {
+  background: #e4f5e7;
+  color: #185b29;
+}
+
+.invalid {
+  background: #ffebeb;
+  color: #922;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .card {
+    margin: 20px 12px;
+    padding: 22px;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -66,78 +113,81 @@ a { color: inherit; }
   <p>Enter your certificate ID below to check its record.</p>
 
   <form id="verifyForm">
-    <input id="certificateId"
+    <input
+      id="certificateId"
       type="text"
       placeholder="Example: OAP-2026-0001"
-      required>
+      autocomplete="off"
+      required
+    >
     <button type="submit">Verify Certificate</button>
   </form>
 
   <div id="result" aria-live="polite"></div>
-  
 </main>
 
 <footer>© 2026 OAK AND PINE</footer>
 
 <script>
 const certificates = {
-"OAP-2026-0001": {
-  holder: "Prashant Kumar Bhatt",
-  issueDate: "14 October 2026"
-  internshipPeriod: "01 September 2026 – 10 October 2026",
-},
+  "OAP-2026-0001": {
+    holder: "Prashant Kumar Bhatt",
+    issueDate: "14 October 2026",
+    internshipPeriod: "01 September 2026 – 10 October 2026"
+  },
+
   "OAP-2026-0002": {
-    holder: "siya ghildiyal",
-    issueDate: "14 October 2026"
-  internshipPeriod: "01 January 2026 – 10 July 2026",
-},
+    holder: "Siya Ghildiyal",
+    issueDate: "14 October 2026",
+    internshipPeriod: "01 January 2026 – 10 July 2026"
   },
+
   "OAP-2026-0003": {
-    holder: "Ashmit bhatt",
-    issueDate: "14 October 2026"
-    internshipPeriod: "01 September 2026 – 10 October 2026",
-},
+    holder: "Ashmit Bhatt",
+    issueDate: "14 October 2026",
+    internshipPeriod: "01 September 2026 – 10 October 2026"
   },
+
   "OAP-2026-0004": {
-    holder: "vikas nautiyal",
-    issueDate: "14 October 2026"
-      internshipPeriod: "01 September 2026 – 10 October 2026",
-},
+    holder: "Vikas Nautiyal",
+    issueDate: "14 October 2026",
+    internshipPeriod: "01 September 2026 – 10 October 2026"
   },
+
   "OAP-2026-0005": {
-    holder: "manish bhatt",
-    issueDate: "14 October 2026"
-        internshipPeriod: "01 September 2026 – 10 October 2026",
-},
+    holder: "Manish Bhatt",
+    issueDate: "14 October 2026",
+    internshipPeriod: "01 September 2026 – 10 October 2026"
   }
 };
 
 document.getElementById("verifyForm")
 .addEventListener("submit", function(event) {
-event.preventDefault();
+  event.preventDefault();
 
-const id = document.getElementById("certificateId")
-.value.trim().toUpperCase();
-const result = document.getElementById("result");
-const certificate = certificates[id];
+  const id = document.getElementById("certificateId")
+    .value.trim().toUpperCase();
 
-if (certificate) {
-result.className = "valid";
-result.innerHTML = `
+  const result = document.getElementById("result");
+  const certificate = certificates[id];
 
-  <h3>Certificate Record Found</h3>
-  <p><strong>Certificate ID:</strong> ${id}</p>
-  <p><strong>Certificate Holder:</strong> ${certificate.holder}</p>
-  <p><strong>Certificate Type:</strong> Internship Completion Certificate</p>
-  <p><strong>Internship Period:</strong> ${certificate.internshipPeriod || "Not specified"}</p>
-  <p><strong>Issue Date:</strong> ${certificate.issueDate}</p>
-  <p><strong>Issued By:</strong> OAK AND PINE</p>
-  <p>Please match these details with the original certificate.</p>
-`;} else {
-result.className = "invalid";
-result.textContent =
-"No matching certificate record found. Please check the ID or contact OAK AND PINE.";
-}
+  if (certificate) {
+    result.className = "valid";
+    result.innerHTML = `
+      <h3>Certificate Record Found</h3>
+      <p><strong>Certificate ID:</strong> ${id}</p>
+      <p><strong>Certificate Holder:</strong> ${certificate.holder}</p>
+      <p><strong>Certificate Type:</strong> Internship Completion Certificate</p>
+      <p><strong>Internship Period:</strong> ${certificate.internshipPeriod}</p>
+      <p><strong>Issue Date:</strong> ${certificate.issueDate}</p>
+      <p><strong>Issued By:</strong> OAK AND PINE</p>
+      <p>Please match these details with the original certificate.</p>
+    `;
+  } else {
+    result.className = "invalid";
+    result.textContent =
+      "No matching certificate record found. Please check the ID or contact OAK AND PINE.";
+  }
 });
 </script>
 
