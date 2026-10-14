@@ -1,64 +1,73 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Certificate Verification | OAK AND PINE</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#eef1eb;color:#26382f;font-family:Arial,sans-serif}
-header{background:#123b30;color:white;text-align:center;padding:30px 15px;border-bottom:4px solid #c6a45b}
-.brand{font-size:25px;letter-spacing:4px;font-weight:bold}
-.tag{font-size:11px;letter-spacing:2px;color:#e7d6a8;margin-top:10px}
-main{max-width:700px;margin:30px auto;padding:0 14px}
-.card{background:white;padding:28px;border-radius:12px;border-top:4px solid #c6a45b;box-shadow:0 8px 25px #00000010}
-.eyebrow{font-size:12px;letter-spacing:2px;color:#8a7136;font-weight:bold}
-h1{color:#123b30;font-size:30px}
-.status{display:inline-block;background:#edf5ee;color:#28603a;border:1px solid #b6d2bb;padding:9px 13px;border-radius:30px;font-size:12px;font-weight:bold}
-.notice{background:#f7f4eb;border-left:3px solid #c6a45b;padding:13px;font-size:13px;line-height:1.6;margin:20px 0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 15px;margin-top:25px}
-.label{font-size:11px;color:#727c74;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.value{font-size:15px;font-weight:bold;overflow-wrap:anywhere}
-.id{background:#123b30;color:white;padding:15px;border-radius:8px;margin-top:25px}
-.id .label{color:#e7d6a8}
-footer{text-align:center;padding:20px;color:#66736a;font-size:12px;line-height:1.7}
-@media(max-width:450px){.grid{grid-template-columns:1fr}h1{font-size:25px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAK AND PINE | Certificate Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f1e8;
+      color: #243b2a;
+      text-align: center;
+      padding: 40px 15px;
+    }
+    .card {
+      background: white;
+      max-width: 450px;
+      margin: 30px auto;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px #00000012;
+    }
+    input, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    input { border: 1px solid #aaa; }
+    button {
+      background: #243b2a;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #result { margin-top: 18px; }
+    a { color: #243b2a; }
+  </style>
 </head>
 <body>
-<header>
-<div class="brand">OAK AND PINE</div>
-<div class="tag">GROW WITH PURPOSE</div>
-</header>
-<main>
-<section class="card">
-<div class="eyebrow">OFFICIAL ISSUER RECORD</div>
-<h1>Internship Verification</h1>
-<p>Certificate details recorded by OAK AND PINE.</p>
-<div class="status">● ISSUER-RECORDED</div>
-<div class="notice">This page displays a record maintained by the issuer. It is not independent university accreditation or third-party verification.</div>
-<div class="grid">
-<div><div class="label">Recipient</div><div class="value">Prashant Kumar Bhatt</div></div>
-<div><div class="label">Role</div><div class="value">Software Developer Intern</div></div>
-<div><div class="label">Programme</div><div class="value">B.Tech, Computer Science &amp; Engineering</div></div>
-<div><div class="label">University</div><div class="value">Tula's University</div></div>
-<div><div class="label">Work Mode</div><div class="value">Remote</div></div>
-<div><div class="label">Project</div><div class="value">OAK AND PINE Business Website</div></div>
-<div><div class="label">Technology</div><div class="value">Python</div></div>
-<div><div class="label">Start Date</div><div class="value">1 September 2026</div></div>
-<div><div class="label">End Date</div><div class="value">10 October 2026</div></div>
-<div><div class="label">Issuer</div><div class="value">OAK AND PINE</div></div>
-</div>
-<div class="id">
-<div class="label">Certificate ID</div>
-<div class="value">OAP/INT/2026/001</div>
-</div>
-<div class="notice">The internship was self-supervised by the proprietor. Contact the issuer to confirm any additional details.</div>
-<div class="label">Issuer Contact</div>
-<div class="value">workflowprashant08@gmail.com</div>
-</section>
-</main>
-<footer>OAK AND PINE · Certificate Record<br>Check these details against the original certificate.</footer>
+  <div class="card">
+    <h1>OAK AND PINE</h1>
+    <p>Certificate Verification Portal</p>
+    <p>Enter your certificate ID to check its status.</p>
+
+    <form id="verifyForm">
+      <input id="certificateId"
+        type="text"
+        placeholder="Enter Certificate ID"
+        required>
+      <button type="submit">Verify Certificate</button>
+    </form>
+
+    <div id="result" aria-live="polite"></div>
+
+    <p>
+      <a href="https://oak-pine-groves.lovable.app">
+        Visit OAK AND PINE Website
+      </a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("verifyForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("result").textContent =
+        "Verification is not configured yet. Please contact OAK AND PINE.";
+    });
+  </script>
 </body>
 </html>
