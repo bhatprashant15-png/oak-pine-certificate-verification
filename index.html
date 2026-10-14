@@ -1,73 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OAK AND PINE | Certificate Verification</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f1e8;
-      color: #243b2a;
-      text-align: center;
-      padding: 40px 15px;
-    }
-    .card {
-      background: white;
-      max-width: 450px;
-      margin: 30px auto;
-      padding: 28px;
-      border-radius: 12px;
-      box-shadow: 0 4px 18px #00000012;
-    }
-    input, button {
-      box-sizing: border-box;
-      width: 100%;
-      padding: 12px;
-      margin-top: 12px;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-    input { border: 1px solid #aaa; }
-    button {
-      background: #243b2a;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    #result { margin-top: 18px; }
-    a { color: #243b2a; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OAK AND PINE | Certificate Verification</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f1e8;
+  color: #263b2b;
+}
+header {
+  background: #263b2b;
+  color: white;
+  padding: 24px 15px;
+  text-align: center;
+}
+header h1 { margin: 0; letter-spacing: 2px; }
+header p { margin-bottom: 0; }
+.card {
+  background: white;
+  max-width: 520px;
+  margin: 35px auto;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px #0001;
+}
+input, button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+input { border: 1px solid #bbb; }
+button {
+  background: #263b2b;
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+#result {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+.valid { background: #e4f5e7; color: #185b29; }
+.invalid { background: #ffebeb; color: #922; }
+footer { text-align: center; padding: 20px; }
+a { color: inherit; }
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1>OAK AND PINE</h1>
-    <p>Certificate Verification Portal</p>
-    <p>Enter your certificate ID to check its status.</p>
 
-    <form id="verifyForm">
-      <input id="certificateId"
-        type="text"
-        placeholder="Enter Certificate ID"
-        required>
-      <button type="submit">Verify Certificate</button>
-    </form>
+<header>
+  <h1>OAK AND PINE</h1>
+  <p>Certificate Verification Portal</p>
+</header>
 
-    <div id="result" aria-live="polite"></div>
+<main class="card">
+  <h2>Verify Your Certificate</h2>
+  <p>Enter your certificate ID below to check its record.</p>
 
-    <p>
-      <a href="https://oak-pine-groves.lovable.app">
-        Visit OAK AND PINE Website
-      </a>
-    </p>
-  </div>
+  <form id="verifyForm">
+    <input id="certificateId"
+      type="text"
+      placeholder="Example: OAP-2026-0001"
+      required>
+    <button type="submit">Verify Certificate</button>
+  </form>
 
-  <script>
-    document.getElementById("verifyForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      document.getElementById("result").textContent =
-        "Verification is not configured yet. Please contact OAK AND PINE.";
-    });
-  </script>
+  <div id="result" aria-live="polite"></div>
+
+  <p>
+    Official website:
+    <a href="https://oak-pine-groves.lovable.app"
+       target="_blank" rel="noopener">
+       oak-pine-groves.lovable.app
+    </a>
+  </p>
+</main>
+
+<footer>© 2026 OAK AND PINE</footer>
+
+<script>
+const certificates = {
+  "OAP-2026-0001": {
+    holder: "Certificate Holder 1",
+    issueDate: "14 October 2026"
+  },
+  "OAP-2026-0002": {
+    holder: "Certificate Holder 2",
+    issueDate: "14 October 2026"
+  },
+  "OAP-2026-0003": {
+    holder: "Certificate Holder 3",
+    issueDate: "14 October 2026"
+  },
+  "OAP-2026-0004": {
+    holder: "Certificate Holder 4",
+    issueDate: "14 October 2026"
+  },
+  "OAP-2026-0005": {
+    holder: "Certificate Holder 5",
+    issueDate: "14 October 2026"
+  }
+};
+
+document.getElementById("verifyForm")
+.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const id = document.getElementById("certificateId")
+    .value.trim().toUpperCase();
+  const result = document.getElementById("result");
+  const certificate = certificates[id];
+
+  if (certificate) {
+    result.className = "valid";
+    result.innerHTML = `
+      <h3>Certificate Record Found</h3>
+      <p><strong>Certificate ID:</strong> ${id}</p>
+      <p><strong>Holder:</strong> ${certificate.holder}</p>
+      <p><strong>Issue Date:</strong> ${certificate.issueDate}</p>
+      <p>Please match these details with the original certificate.</p>
+    `;
+  } else {
+    result.className = "invalid";
+    result.textContent =
+      "No matching certificate record found. Please check the ID or contact OAK AND PINE.";
+  }
+});
+</script>
+
 </body>
 </html>
