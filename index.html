@@ -123,8 +123,17 @@ const certificate = certificates[id];
 
 if (certificate) {
 result.className = "valid";
-result.innerHTML = "<h3>Certificate Record Found</h3> <p><strong>Certificate ID:</strong> ${id}</p> <p><strong>Certificate Holder:</strong> ${certificate.holder}</p> <p><strong>Certificate Type:</strong> Internship Completion Certificate</p> <p><strong>Internship Period:</strong> ${certificate.internshipPeriod || "Not specified"}</p> <p><strong>Issue Date:</strong> ${certificate.issueDate}</p> <p><strong>Issued By:</strong> OAK AND PINE</p> <p>Please match these details with the original certificate.</p>";
-} else {
+result.innerHTML = `
+
+  <h3>Certificate Record Found</h3>
+  <p><strong>Certificate ID:</strong> ${id}</p>
+  <p><strong>Certificate Holder:</strong> ${certificate.holder}</p>
+  <p><strong>Certificate Type:</strong> Internship Completion Certificate</p>
+  <p><strong>Internship Period:</strong> ${certificate.internshipPeriod || "Not specified"}</p>
+  <p><strong>Issue Date:</strong> ${certificate.issueDate}</p>
+  <p><strong>Issued By:</strong> OAK AND PINE</p>
+  <p>Please match these details with the original certificate.</p>
+`;} else {
 result.className = "invalid";
 result.textContent =
 "No matching certificate record found. Please check the ID or contact OAK AND PINE.";
